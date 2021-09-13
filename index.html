@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Speed Read</title>
+    <link rel="icon" type="image/ico" href="logo.png">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body id="body">
+    <h1 id="title">Speed Read</h1>
+    <textarea id="text" class="text" rows="20"></textarea><br><br>
+    <input type="range" min="100" max="200" value="120" class="speed" id="speed">
+    <h1 id="read"></h1>
+    <a id="start" onclick="start()">START</a><br><br><br>
+    <a id="creator" href="https://gustafik.ml" target="_blank">CREATOR</a>
+    <a id="work" href="https://youtu.be/K8dIVNDMA_0" target="_blank">HOW DOES IT WORK</a><br><br>
+    <input type="color" id="color" value="#ff7f2a">
+    <a id="back" onclick="back()">BACK</a>
+</body>
+
+<script>
+
+let speed = 120
+document.getElementById("speed").value = speed
+
+window.addEventListener('touchstart', function() {
+    let color = document.getElementById("color").value
+    document.getElementById("body").style.backgroundColor = color;
+
+    speed = parseInt(document.getElementById("speed").value)
+});
+
+window.addEventListener('mousemove', function() {
+    let color = document.getElementById("color").value
+    document.getElementById("body").style.backgroundColor = color;
+
+    speed = parseInt(document.getElementById("speed").value)
+});
+
+let returnVal = false
+
+function start() {
+
+    returnVal = false
+
+    if (!document.getElementById("text").value || document.getElementById("text").value.length === 0) {
+        alert("NO INPUT")
+        return
+    }
+
+    let textAreaValue = document.getElementById("text").value;
+
+    document.getElementById("title").style.display = "none";
+    document.getElementById("text").style.display = "none";
+    document.getElementById("speed").style.display = "none";
+    document.getElementById("start").style.display = "none";
+    document.getElementById("creator").style.display = "none";
+    document.getElementById("work").style.display = "none";
+    document.getElementById("color").style.display = "none";
+
+    document.getElementById("back").style.display = "initial";
+
+    let read = document.getElementById("read");
+
+    textAreaArray = textAreaValue.split(" ")
+
+    task(textAreaArray)
+
+    function task(x) {
+        let slower = 0
+
+        let word = x.shift()
+
+        if (word.length > 7) {
+            slower = 10
+        }
+
+        setTimeout(function() {
+
+            if (returnVal == true) {
+                return
+            }
+
+            read.innerHTML = word
+
+            if (x.length == 0) {
+                return
+            }
+
+            task(x)
+
+        }, speed + slower);
+    }
+}
+
+function back() {
+    document.getElementById("title").style.display = "block";
+    document.getElementById("text").style.display = "initial";
+    document.getElementById("speed").style.display = "initial";
+    document.getElementById("start").style.display = "initial";
+    document.getElementById("creator").style.display = "initial";
+    document.getElementById("work").style.display = "initial";
+    document.getElementById("color").style.display = "initial";
+
+    document.getElementById("back").style.display = "none";
+
+    returnVal = true
+
+    read.innerHTML = ""
+}
+
+</script>
+
+</html>

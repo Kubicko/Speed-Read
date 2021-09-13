@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -8,6 +9,7 @@
     <link rel="icon" type="image/ico" href="logo.png">
     <link rel="stylesheet" href="style.css">
 </head>
+
 <body id="body">
     <h1 id="title">Speed Read</h1>
     <textarea id="text" class="text" rows="20"></textarea><br><br>
@@ -22,94 +24,94 @@
 
 <script>
 
-let speed = 120
-document.getElementById("speed").value = speed
+    let speed = 120
+    document.getElementById("speed").value = speed
 
-window.addEventListener('touchstart', function() {
-    let color = document.getElementById("color").value
-    document.getElementById("body").style.backgroundColor = color;
+    window.addEventListener('touchstart', function () {
+        let color = document.getElementById("color").value
+        document.getElementById("body").style.backgroundColor = color;
 
-    speed = parseInt(document.getElementById("speed").value)
-});
+        speed = parseInt(document.getElementById("speed").value)
+    });
 
-window.addEventListener('mousemove', function() {
-    let color = document.getElementById("color").value
-    document.getElementById("body").style.backgroundColor = color;
+    window.addEventListener('mousemove', function () {
+        let color = document.getElementById("color").value
+        document.getElementById("body").style.backgroundColor = color;
 
-    speed = parseInt(document.getElementById("speed").value)
-});
+        speed = parseInt(document.getElementById("speed").value)
+    });
 
-let returnVal = false
+    let returnVal = false
 
-function start() {
+    function start() {
 
-    returnVal = false
+        returnVal = false
 
-    if (!document.getElementById("text").value || document.getElementById("text").value.length === 0) {
-        alert("NO INPUT")
-        return
-    }
-
-    let textAreaValue = document.getElementById("text").value;
-
-    document.getElementById("title").style.display = "none";
-    document.getElementById("text").style.display = "none";
-    document.getElementById("speed").style.display = "none";
-    document.getElementById("start").style.display = "none";
-    document.getElementById("creator").style.display = "none";
-    document.getElementById("work").style.display = "none";
-    document.getElementById("color").style.display = "none";
-
-    document.getElementById("back").style.display = "initial";
-
-    let read = document.getElementById("read");
-
-    textAreaArray = textAreaValue.split(" ")
-
-    task(textAreaArray)
-
-    function task(x) {
-        let slower = 0
-
-        let word = x.shift()
-
-        if (word.length > 7) {
-            slower = 10
+        if (!document.getElementById("text").value || document.getElementById("text").value.length === 0) {
+            alert("NO INPUT")
+            return
         }
 
-        setTimeout(function() {
+        let textAreaValue = document.getElementById("text").value;
 
-            if (returnVal == true) {
-                return
+        document.getElementById("title").style.display = "none";
+        document.getElementById("text").style.display = "none";
+        document.getElementById("speed").style.display = "none";
+        document.getElementById("start").style.display = "none";
+        document.getElementById("creator").style.display = "none";
+        document.getElementById("work").style.display = "none";
+        document.getElementById("color").style.display = "none";
+
+        document.getElementById("back").style.display = "initial";
+
+        let read = document.getElementById("read");
+
+        textAreaArray = textAreaValue.split(" ")
+
+        task(textAreaArray)
+
+        function task(x) {
+            let slower = 0
+
+            let word = x.shift()
+
+            if (word.length > 7) {
+                slower = 10
             }
 
-            read.innerHTML = word
+            setTimeout(function () {
 
-            if (x.length == 0) {
-                return
-            }
+                if (returnVal == true) {
+                    return
+                }
 
-            task(x)
+                read.innerHTML = word
 
-        }, speed + slower);
+                if (x.length == 0) {
+                    return
+                }
+
+                task(x)
+
+            }, speed + slower);
+        }
     }
-}
 
-function back() {
-    document.getElementById("title").style.display = "block";
-    document.getElementById("text").style.display = "initial";
-    document.getElementById("speed").style.display = "initial";
-    document.getElementById("start").style.display = "initial";
-    document.getElementById("creator").style.display = "initial";
-    document.getElementById("work").style.display = "initial";
-    document.getElementById("color").style.display = "initial";
+    function back() {
+        document.getElementById("title").style.display = "block";
+        document.getElementById("text").style.display = "initial";
+        document.getElementById("speed").style.display = "initial";
+        document.getElementById("start").style.display = "initial";
+        document.getElementById("creator").style.display = "initial";
+        document.getElementById("work").style.display = "initial";
+        document.getElementById("color").style.display = "initial";
 
-    document.getElementById("back").style.display = "none";
+        document.getElementById("back").style.display = "none";
 
-    returnVal = true
+        returnVal = true
 
-    read.innerHTML = ""
-}
+        read.innerHTML = ""
+    }
 
 </script>
 
